@@ -28,15 +28,13 @@ func createProblemDir(problemname string) {
   }
   if err := os.Mkdir(fmt.Sprint(curr_dir,"/",contest_num,"/",problem_num),os.ModePerm); err != nil {
     fmt.Println("Error Making Directory")
-    return
   }
   if err := os.Chdir(fmt.Sprint(curr_dir,"/",contest_num,"/",problem_num)); err != nil {
     fmt.Println("Error Changing Directory")
-    return
   }
 }
 
-var seperator []byte = make([]byte, 21);
+var seperator []byte = []byte{'-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','\n'};
 
 func writeSamples(input [][]byte,output [][]byte) {
   // for i:=1 ; i <= len(input) ; i++ {
@@ -48,10 +46,10 @@ func writeSamples(input [][]byte,output [][]byte) {
     fmt.Println("Could not create input.txt")
     return
   }
-  for i := range(seperator) {
-    seperator[i] = '-'
-  }
-  seperator[20] = '\n'
+  // for i := range(seperator) {
+  //   seperator[i] = '-'
+  // }
+  // seperator[20] = '\n'
   defer inpf.Close()
   for i := 0; i < len(input) ; i++ {
     inpf.Write(input[i]);

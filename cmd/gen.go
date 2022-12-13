@@ -27,6 +27,7 @@ func createTemplateFile() {
 	f, err := os.Create("solve.cpp")
 	if err != nil {
 		fmt.Println("Could'nt create solve.cpp")
+    return
 	}
   defer f.Close()
   f.WriteString(templateString)

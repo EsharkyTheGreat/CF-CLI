@@ -21,17 +21,26 @@ func compileProg() {
 }
 
 func RunProg() {
-  command := exec.Command("./a.out")
-  var o bytes.Buffer
-  output := io.Writer(&o)
   buf,_ := os.ReadFile("input.txt")
+  out_bf,_ := os.ReadFile("output.txt")
+  outx := bytes.Split(out_bf,seperator)
   inp := bytes.Split(buf,seperator)
-  i := bytes.NewReader(inp[0])
-  command.Stdin = i;
-  command.Stdout = output 
-  command.Run()
-  fmt.Println("Output")
-  fmt.Println(o.String())
+  for i := 0;i < len(inp)-1;i++ {
+    command := exec.Command("./a.out")
+    println("Iteration ",i);
+    print(string(inp[i]))
+    var o bytes.Buffer
+    output := io.Writer(&o)
+    ib := bytes.NewReader(inp[i])
+    command.Stdin = ib;
+    command.Stdout = output 
+    command.Run()
+    fmt.Println("Output")
+    fmt.Print(o.String())
+    fmt.Println("Correct Output")
+    fmt.Print(string(outx[i]));
+    fmt.Print(string(seperator))
+  }
 }
 
 var tester = &cobra.Command{
